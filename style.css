@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #1C2A32;
+    background: #F0EFEF;
     margin: 0;
     font-family: "Prompt", sans-serif;
     width: 100%;
@@ -61,7 +61,7 @@ label {
 
 input, textarea {
     margin-bottom: 12px;
-    background: #1C2A32;
+    background: #F0EFEF;
     border: 1px solid #54596D;
     border-radius: 6px;
     padding: 12px 16px;
@@ -183,7 +183,7 @@ img:hover {
 
 /* ===== INFO PAGE ===== */
 .infopage {
-    background: #1C2A32;
+    background: #F0EFEF;
     border: 1px solid #54596D;
     border-radius: 12px;
     padding: 30px;
@@ -227,7 +227,7 @@ img:hover {
     flex: 1;
     min-width: 300px;
     padding: 30px;
-    background: #1C2A32;
+    background: #F0EFEF;
     border: 1px solid #54596D;
     border-radius: 12px;
     box-shadow: none;
@@ -279,7 +279,7 @@ img:hover {
 .darkblock {
     display: inline-block;
     padding: 20px 30px;
-    background: #1C2A32;
+    background: #F0EFEF;
     border: 1px solid #54596D;
     border-radius: 8px;
     box-shadow: none;
@@ -360,7 +360,7 @@ img:hover {
 }
 
 .box-dark {
-    background: linear-gradient(135deg, #54596D, #1C2A32);
+    background: linear-gradient(135deg, #54596D, #F0EFEF);
     box-shadow: 0 0 40px rgba(84, 89, 109, 0.2);
 }
 
