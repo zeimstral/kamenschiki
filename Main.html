@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <title>Simulacrum - Презентация</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Libertinus+Keyboard&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+</script>
+<body>
+    <div class="presentation-wrapper">
+        <!-- Шапка общая для всех слайдов -->
+        <div class="page">
+            <div class="hat">
+                <h1>KAMENSCHIKI</h1>
+                <div class="slide-nav">
+                    <button class="dot active" data-slide="0"></button>
+                    <button class="dot" data-slide="1"></button>
+                    <button class="dot" data-slide="2"></button>
+                    <button class="dot" data-slide="3"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контейнер для слайдов -->
+        <div class="slides-container" id="slidesContainer">
+            <!-- Слайд 1 -->
+<div class="slide active" data-slide="0">
+    <div class="page">
+        <div class="slide-content">
+            <!-- Киберпанк-лоадер полный -->
+                    <div class="cyber-loader-full">
+                        <div class="cyber-loader-rings">
+                            <div class="cyber-loader-ring cyber-loader-ring-1"></div>
+                            <div class="cyber-loader-ring cyber-loader-ring-2"></div>
+                            <div class="cyber-loader-ring cyber-loader-ring-3"></div>
+                            <div class="cyber-loader-center"></div>
+                        </div>
+                        <span class="cyber-loader-text">Загрузка</span>
+                    </div>
+                    
+                    <div class="typewriter-container">
+                        <h1 class="typewriter-title">
+                            <span id="typewriter"></span>
+                            <span class="cursor">|</span>
+                        </h1>
+                        <span class="typewriter-placeholder" id="placeholder"></span>
+                    </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Слайд 2 -->
+            <div class="slide" data-slide="1">
+                <div class="page">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Кто мы?</h1>
+                        <div class="infopage" style="background: transparent; border: none; padding: 0; margin: 0;">
+                            <div class="cyber-full-box">
+                                <div class="cyber-glitch"></div>
+                                <div class="cyber-scanline"></div>
+                                <div class="cyber-content">
+                                    <p class="infoblock" style="color: #F1F5F8; margin-bottom: 20px;">
+                                        Наша команда — это группа талантливых инженеров и разработчиков, 
+                                        которые стремятся создавать качественные и инновационные решения.
+                                    </p>
+                                    <div class="bottle-container" style="padding: 20px 0;">
+                                        <object data="images/bottle.svg" type="image/svg+xml" class="bottle" id="bottle"></object>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Слайд 3 -->
+            <div class="slide" data-slide="2">
+                <div class="page">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Наши проекты</h1>
+                        <div class="gallery">
+                            <div class="project-card cyber-corner-box">
+                                <div class="project-icon">🏗️</div>
+                                <h3>Строительство</h3>
+                                <p>Возводим качественные здания</p>
+                            </div>
+                            <div class="project-card cyber-corner-box">
+                                <div class="project-icon">🔧</div>
+                                <h3>Ремонт</h3>
+                                <p>Восстанавливаем и улучшаем</p>
+                            </div>
+                            <div class="project-card cyber-corner-box">
+                                <div class="project-icon">📐</div>
+                                <h3>Проектирование</h3>
+                                <p>Создаём уникальные проекты</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Слайд 4 -->
+            <div class="slide" data-slide="3">
+                <div class="page">
+                    <div class="slide-content">
+                        <h1 class="slide-title">Контакты</h1>
+                        <div class="contact-info cyber-full-box">
+                            <div class="cyber-glitch"></div>
+                            <div class="cyber-scanline"></div>
+                            <div class="cyber-content">
+                                <div class="contact-item">
+                                    <span class="contact-icon">📧</span>
+                                    <span class="contact-text">info@kamenschiki.ru</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">📞</span>
+                                    <span class="contact-text">+7 (999) 123-45-67</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">📍</span>
+                                    <span class="contact-text">г. Москва, ул. Строителей, 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Управление слайдами (фиксированное) - БЕГУЩАЯ СТРОКА -->
+        <div class="slide-controls-wrapper">
+            <div class="slide-controls">
+                <div class="marquee-container">
+                    <div class="marquee-track" id="marqueeTrack">
+                        <!-- ОДНА копия контента (без дублирования!) -->
+                        <span class="marquee-item">KAMENSCHIKI</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">ХАНТЫ-МАНСИЙСК 86</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">ШИНОМОНТАЖ</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">КАЧЕСТВО ГАРАНТИРУЕМ</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">ПЛОТИНУ НАДО ПОДНЯТЬ РЫЧАГОМ</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">Я ЕГО ДАМ</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">КАНАЛ НУЖНО ЗАВАЛИТЬ КАМНЕМ</span>
+                        <span class="marquee-divider">|</span>
+                        <span class="marquee-item">КАМЕНЬ Я НЕ ДАМ</span>
+                        <span class="marquee-divider">|</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { animate } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+
+        // ===== БЕГУЩАЯ СТРОКА С АВТО-РАСЧЁТОМ =====
+        function setupMarquee() {
+            const track = document.getElementById('marqueeTrack');
+            if (!track) return;
+            
+            // Сохраняем оригинальный HTML
+            const originalHTML = track.innerHTML;
+            
+            // Создаём ДВЕ копии для бесконечности
+            track.innerHTML = originalHTML + originalHTML;
+            
+            // НЕМНОГО ЖДЁМ, чтобы браузер отрисовал контент
+            requestAnimationFrame(() => {
+                // Получаем ширину одной копии
+                const copyWidth = track.scrollWidth / 2;
+                
+                // Скорость прокрутки (пикселей в секунду)
+                const speed = 80;
+                
+                // Рассчитываем длительность для одной копии
+                const duration = Math.max(copyWidth / speed, 5);
+                
+                // Создаём динамические keyframes
+                const styleId = 'marquee-keyframes';
+                let style = document.getElementById(styleId);
+                if (!style) {
+                    style = document.createElement('style');
+                    style.id = styleId;
+                    document.head.appendChild(style);
+                }
+                style.textContent = `
+                    @keyframes marquee-scroll-js {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-${copyWidth}px); }
+                    }
+                `;
+                
+                // Применяем анимацию
+                track.style.animation = `marquee-scroll-js ${duration}s linear infinite`;
+                track.style.willChange = 'transform';
+            });
+        }
+
+        // ===== SLIDER LOGIC =====
+        class PresentationSlider {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.dots = document.querySelectorAll('.dot');
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                this.isAnimating = false;
+
+                this.init();
+            }
+
+            init() {
+                this.updateUI();
+
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goTo(index));
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        this.next();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.prev();
+                    }
+                });
+
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                
+                document.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) this.next();
+                        else this.prev();
+                    }
+                });
+            }
+
+            goTo(index) {
+                if (this.isAnimating || index === this.currentSlide) return;
+                this.isAnimating = true;
+
+                const currentSlide = this.slides[this.currentSlide];
+                const nextSlide = this.slides[index];
+                const direction = index > this.currentSlide ? 1 : -1;
+
+                animate(currentSlide, {
+                    opacity: [1, 0],
+                    x: [0, direction * -50],
+                    scale: [1, 0.95]
+                }, {
+                    duration: 0.4,
+                    ease: "easeIn"
+                });
+
+                nextSlide.style.display = 'flex';
+                nextSlide.style.opacity = '0';
+                nextSlide.style.transform = `translateX(${direction * 50}px) scale(0.95)`;
+
+                animate(nextSlide, {
+                    opacity: [0, 1],
+                    x: [direction * 50, 0],
+                    scale: [0.95, 1]
+                }, {
+                    duration: 0.5,
+                    ease: "easeOut",
+                    onComplete: () => {
+                        currentSlide.style.display = 'none';
+                        this.isAnimating = false;
+                    }
+                });
+
+                this.currentSlide = index;
+                this.updateUI();
+            }
+
+            next() {
+                const next = (this.currentSlide + 1) % this.totalSlides;
+                this.goTo(next);
+            }
+
+            prev() {
+                const prev = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.goTo(prev);
+            }
+
+            updateUI() {
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+
+                this.slides.forEach((slide, index) => {
+                    slide.style.display = index === this.currentSlide ? 'flex' : 'none';
+                    slide.style.opacity = index === this.currentSlide ? '1' : '0';
+                });
+            }
+        }
+
+        // ===== ЗАПУСК ВСЕГО =====
+        // Запускаем слайдер
+        const slider = new PresentationSlider();
+        
+        // Запускаем бегущую строку после загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupMarquee);
+        } else {
+            setupMarquee();
+        }
+
+        // ===== TYPEWRITER =====
+        class Typewriter {
+            constructor(element, placeholderElement, cursorElement) {
+                this.element = element;
+                this.placeholder = placeholderElement;
+                this.cursor = cursorElement;
+                this.strings = [];
+                this.currentStringIndex = 0;
+                this.currentCharIndex = 0;
+                this.isDeleting = false;
+                this.speed = 80;
+                this.deleteSpeed = 40;
+                this.pauseDelay = 1500;
+            }
+            
+            addString(text) {
+                this.strings.push(text);
+                return this;
+            }
+            
+            setSpeed(speed) {
+                this.speed = speed;
+                return this;
+            }
+            
+            setPauseTime(time) {
+                this.pauseDelay = time;
+                return this;
+            }
+            
+            start() {
+                const longestText = this.strings.reduce((a, b) => a.length > b.length ? a : b);
+                if (this.placeholder) {
+                    this.placeholder.textContent = longestText;
+                }
+                if (this.cursor) {
+                    this.cursor.style.opacity = '1';
+                }
+                this.type();
+            }
+            
+            type() {
+                const current = this.strings[this.currentStringIndex];
+                
+                if (this.isDeleting) {
+                    this.element.textContent = current.substring(0, this.currentCharIndex - 1);
+                    this.currentCharIndex--;
+                    
+                    if (this.currentCharIndex === 0) {
+                        this.isDeleting = false;
+                        this.currentStringIndex = (this.currentStringIndex + 1) % this.strings.length;
+                        setTimeout(() => this.type(), 500);
+                        return;
+                    }
+                    
+                    setTimeout(() => this.type(), this.deleteSpeed);
+                } else {
+                    this.element.textContent = current.substring(0, this.currentCharIndex + 1);
+                    this.currentCharIndex++;
+                    
+                    if (this.currentCharIndex === current.length) {
+                        setTimeout(() => {
+                            this.isDeleting = true;
+                            this.type();
+                        }, this.pauseDelay);
+                        return;
+                    }
+                    
+                    setTimeout(() => this.type(), this.speed);
+                }
+            }
+        }
+
+        const typewriter = new Typewriter(
+            document.getElementById('typewriter'),
+            document.getElementById('placeholder'),
+            document.querySelector('.cursor')
+        );
+
+        typewriter
+            .addString('Мы каменщики')
+            .addString('Работаем 26 дней')
+            .addString('Без зарплаты')
+            .setSpeed(60)
+            .setPauseTime(2000)
+            .start();
+
+        const cursor = document.querySelector('.cursor');
+        if (cursor) {
+            animate(cursor, { 
+                opacity: [1, 0, 1] 
+            }, {
+                duration: 0.8,
+                repeat: Infinity,
+                ease: "step-end"
+            });
+        }
+
+        // ===== БУТЫЛКА =====
+const bottle = document.getElementById('bottle');
+if (bottle) {
+    // Функция для запуска анимации
+    function startBottleAnimation() {
+        animate(bottle, { 
+            rotate: [-5, 5, -5] 
+        }, {
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+        });
+    }
+    
+    // Пробуем через load
+    bottle.addEventListener('load', startBottleAnimation);
+    
+    // Запасной вариант: если load не сработал, запускаем через таймаут
+    setTimeout(() => {
+        // Если анимация ещё не запущена (проверяем по наличию стиля)
+        if (!bottle.style.animation) {
+            startBottleAnimation();
+        }
+    }, 1000);
+    
+    // Или сразу запускаем (для SVG через object может работать)
+    // Попробуем запустить сразу, если SVG уже загружен
+    if (bottle.contentDocument || bottle.getAttribute('data')) {
+        startBottleAnimation();
+    }
+}
+
+// ===== КИБЕРПАНК-ЛОАДЕР =====
+function setupCyberLoader() {
+    const outer = document.querySelector('.cyber-loader-ring-outer');
+    const middle = document.querySelector('.cyber-loader-ring-middle');
+    const inner = document.querySelector('.cyber-loader-ring-inner');
+    const dot = document.querySelector('.cyber-loader-dot');
+    
+    if (outer) {
+        animate(outer, { rotate: 360 }, {
+            duration: 2.5,
+            repeat: Infinity,
+            ease: "linear"
+        });
+    }
+    
+    if (middle) {
+        animate(middle, { rotate: -360 }, {
+            duration: 1.8,
+            repeat: Infinity,
+            ease: "linear"
+        });
+    }
+    
+    if (inner) {
+        animate(inner, { rotate: 360 }, {
+            duration: 1.2,
+            repeat: Infinity,
+            ease: "linear"
+        });
+    }
+    
+    if (dot) {
+        // Пульсирующая точка
+        animate(dot, { 
+            scale: [1, 1.5, 1],
+            opacity: [0.5, 1, 0.5]
+        }, {
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+        });
+    }
+}
+
+// Запускаем лоадер
+setTimeout(setupCyberLoader, 100);
+    </script>
+
+    <script type="module">
+        // ===== 3D СЦЕНА =====
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+// 1. Создаём сцену
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1C2A32); // Тёмный фон
+
+// 2. Камера
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(3, 2, 5);
+
+// 3. Рендер (делаем прозрачным, чтобы был виден фон страницы)
+const renderer = new THREE.WebGLRenderer({ 
+    antialias: true, 
+    alpha: true  // ← ВКЛЮЧАЕМ ПРОЗРАЧНОСТЬ
+});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+// 🔥 ВАЖНО: позиционируем поверх всего, но с прозрачностью
+renderer.domElement.style.position = 'fixed';
+renderer.domElement.style.top = '0';
+renderer.domElement.style.left = '0';
+renderer.domElement.style.width = '100vw';
+renderer.domElement.style.height = '100vh';
+renderer.domElement.style.zIndex = '0'; // ← МЕНЯЕМ НА 0 (или 1)
+renderer.domElement.style.pointerEvents = 'none'; // чтобы клики проходили сквозь
+
+// Добавляем в конец body, чтобы был поверх фона, но под контентом
+document.body.appendChild(renderer.domElement);
+
+// 4. Управление
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 2.0;
+controls.target.set(0, 0, 0);
+controls.update();
+
+// 5. Свет
+const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
+scene.add(ambientLight);
+
+const mainLight = new THREE.DirectionalLight(0x7EC8FA, 1.5);
+mainLight.position.set(5, 10, 7);
+mainLight.castShadow = true;
+scene.add(mainLight);
+
+const backLight = new THREE.DirectionalLight(0xFB672C, 0.5);
+backLight.position.set(-5, 2, -5);
+scene.add(backLight);
+
+const fillLight = new THREE.DirectionalLight(0xABCAFF, 0.3);
+fillLight.position.set(0, -5, 5);
+scene.add(fillLight);
+
+// 6. Загрузка модели
+const loader = new GLTFLoader();
+const modelPath = 'models/monkeh.glb'; // ← ПРОВЕРЬТЕ ИМЯ ФАЙЛА!
+
+console.log('🔄 Загружаем модель:', modelPath);
+
+loader.load(
+    modelPath,
+    (gltf) => {
+        const model = gltf.scene;
+        
+        // Масштабируем, если нужно
+        // model.scale.set(0.5, 0.5, 0.5);
+        
+        // Центрируем
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+        
+        scene.add(model);
+        console.log('✅ Модель загружена!', model);
+    },
+    (xhr) => {
+        const percent = Math.round((xhr.loaded / xhr.total) * 100);
+        console.log(`📦 Загрузка: ${percent}%`);
+    },
+    (error) => {
+        console.error('❌ Ошибка загрузки модели:', error);
+        createFallbackModel();
+    }
+);
+
+// 7. Заглушка
+function createFallbackModel() {
+    const geometry = new THREE.TorusKnotGeometry(1, 0.3, 64, 8);
+    const material = new THREE.MeshStandardMaterial({ 
+        color: 0x7EC8FA,
+        metalness: 0.8,
+        roughness: 0.2,
+        emissive: 0x7EC8FA,
+        emissiveIntensity: 0.1
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    scene.add(mesh);
+    console.log('⚠️ Показана заглушка (тор)');
+}
+
+// 8. Адаптация под окно
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// 9. Анимационный цикл
+function animate3D() {
+    requestAnimationFrame(animate3D);
+    controls.update();
+    renderer.render(scene, camera);
+}
+animate3D();
+
+console.log('🚀 3D сцена запущена!');
+    </script>
+</body>
+</html>
