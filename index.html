@@ -8,6 +8,50 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Libertinus+Keyboard&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        /* Дополнительный стиль для плавного появления 3D */
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        #three-container.visible {
+            opacity: 1;
+        }
+        /* Остальные слайды поверх 3D */
+        .presentation-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .slide {
+            background: transparent !important;
+        }
+        .page {
+            background: #F0EFEF !important;
+            backdrop-filter: blur(2px);
+        }
+        /* Слайд 8 (индекс 7) делаем прозрачным, чтобы 3D было видно */
+        .slide[data-slide="7"] .page {
+            background: transparent !important;
+            backdrop-filter: none !important;
+        }
+        /* Контент на слайде 8 поверх 3D */
+        .slide[data-slide="7"] .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+        .slide[data-slide="7"] .cyber-full-box {
+            background: #F0EFEF !important;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(230, 89, 7, 0.2);
+        }
+    </style>
 </head>
 <script type="importmap">
     {
@@ -193,7 +237,7 @@
 
                             </div>
                         </div>
-                        <img src="./images/team.png" alt="Сборка стенда" style="min-width: 85%; border-radius: 8px; margin-bottom: 20px;">
+                        <img src="./images/refine.jpg" alt="Сборка стенда" style="min-width: 85%; border-radius: 8px; margin-bottom: 20px;">
                     </div>
                 </div>
             </div>
@@ -469,7 +513,7 @@
 
                             </div>
                         </div>
-                        <img src="./images/kryo.jpg" alt="Сборка стенда" style="min-height: 100%; border-radius: 8px; margin-bottom: 20px;">
+                        <img src="./images/kryo2.jpg" alt="Сборка стенда" style="min-height: 95%; border-radius: 8px; margin-bottom: 20px;">
                     </div>
                 </div>
             </div>
@@ -588,15 +632,16 @@
 
                             </div>
                         </div>
-                        <img src="./images/team.png" alt="Сборка стенда" style="min-width: 98%; border-radius: 8px; margin-bottom: 20px;">
+                        <img src="./images/sovok.jpg" alt="Сборка стенда" style="min-width: 98%; border-radius: 8px; margin-bottom: 20px;">
                     </div>
                 </div>
             </div>
 
-                        <!-- Слайд 8: Варианты установки -->
+                        <!-- Слайд 8: Варианты установки (ЗДЕСЬ ПОЯВЛЯЕТСЯ 3D) -->
             <div class="slide" data-slide="7">
                 <div class="page">
-                    
+                    <div class="slide-content" style="justify-content: center; align-items: center; height: 100%;">
+                    </div>
                 </div>
             </div>
 
@@ -927,7 +972,7 @@
 
                             </div>
                         </div>
-                        <img src="./images/team.png" alt="Сборка стенда" style="min-width: 98%; border-radius: 8px; margin-bottom: 20px;">
+                        <img src="./images/persp.jpg" alt="Сборка стенда" style="min-width: 98%; border-radius: 8px; margin-bottom: 20px;">
                     </div>
                 </div>
             </div>
@@ -960,6 +1005,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Контейнер для 3D (рендеринг в него) -->
+    <div id="three-container"></div>
 
     <script type="module">
         import { animate } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
@@ -996,7 +1044,7 @@
             });
         }
 
-        // ===== SLIDER LOGIC =====
+        // ===== SLIDER LOGIC с управлением 3D =====
         class PresentationSlider {
             constructor() {
                 this.slides = document.querySelectorAll('.slide');
@@ -1004,6 +1052,7 @@
                 this.currentSlide = 0;
                 this.totalSlides = this.slides.length;
                 this.isAnimating = false;
+                this.threeContainer = document.getElementById('three-container');
 
                 this.init();
             }
@@ -1040,6 +1089,9 @@
                         else this.prev();
                     }
                 });
+
+                // Показываем 3D на старте только если активен слайд 8 (индекс 7)
+                this.updateThreeVisibility();
             }
 
             goTo(index) {
@@ -1073,6 +1125,7 @@
                     onComplete: () => {
                         currentSlide.style.display = 'none';
                         this.isAnimating = false;
+                        this.updateThreeVisibility();
                     }
                 });
 
@@ -1100,9 +1153,20 @@
                     slide.style.opacity = index === this.currentSlide ? '1' : '0';
                 });
             }
+
+            // Управление видимостью 3D: показываем только на слайде 8 (индекс 7)
+            updateThreeVisibility() {
+                if (!this.threeContainer) return;
+                const shouldShow = this.currentSlide === 7; // Слайд 8 = индекс 7
+                if (shouldShow) {
+                    this.threeContainer.classList.add('visible');
+                } else {
+                    this.threeContainer.classList.remove('visible');
+                }
+            }
         }
 
-        // ===== ЗАПУСК ВСЕГО =====
+        // ===== ЗАПУСК СЛАЙДЕРА =====
         const slider = new PresentationSlider();
         
         if (document.readyState === 'loading') {
@@ -1208,103 +1272,30 @@
                 ease: "step-end"
             });
         }
-
-        // ===== БУТЫЛКА =====
-        const bottle = document.getElementById('bottle');
-        if (bottle) {
-            function startBottleAnimation() {
-                animate(bottle, { 
-                    rotate: [-5, 5, -5] 
-                }, {
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                });
-            }
-            
-            bottle.addEventListener('load', startBottleAnimation);
-            
-            setTimeout(() => {
-                if (!bottle.style.animation) {
-                    startBottleAnimation();
-                }
-            }, 1000);
-            
-            if (bottle.contentDocument || bottle.getAttribute('data')) {
-                startBottleAnimation();
-            }
-        }
-
-        // ===== КИБЕРПАНК-ЛОАДЕР =====
-        function setupCyberLoader() {
-            const outer = document.querySelector('.cyber-loader-ring-outer');
-            const middle = document.querySelector('.cyber-loader-ring-middle');
-            const inner = document.querySelector('.cyber-loader-ring-inner');
-            const dot = document.querySelector('.cyber-loader-dot');
-            
-            if (outer) {
-                animate(outer, { rotate: 360 }, {
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "linear"
-                });
-            }
-            
-            if (middle) {
-                animate(middle, { rotate: -360 }, {
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "linear"
-                });
-            }
-            
-            if (inner) {
-                animate(inner, { rotate: 360 }, {
-                    duration: 1.2,
-                    repeat: Infinity,
-                    ease: "linear"
-                });
-            }
-            
-            if (dot) {
-                animate(dot, { 
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5]
-                }, {
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                });
-            }
-        }
-
-        setTimeout(setupCyberLoader, 100);
     </script>
 
     <script type="module">
-    // ===== 3D СЦЕНА =====
+    // ===== 3D СЦЕНА (рендеринг в #three-container) =====
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
     // ===== НАСТРОЙКИ =====
     const CONFIG = {
-        // Выберите ось вращения: 'x', 'y', 'z' или 'custom'
         rotationAxis: 'x',
         rotationSpeed: 0.01,
         customAxis: new THREE.Vector3(0.5, 0.5, 0.5),
         autoRotateCamera: false,
-        
-        // ===== НАСТРОЙКИ КАМЕРЫ ДЛЯ ФРОНТАЛЬНОГО ОБЗОРА =====
-        // Позиция камеры - прямо перед моделью
-        cameraPosition: new THREE.Vector3(0, 0, 5), // X:0, Y:0, Z:5 (прямо по центру)
-        
-        // Или если хотите видеть модель чуть сверху:
-        // cameraPosition: new THREE.Vector3(0, 0.5, 5),
-        
+        cameraPosition: new THREE.Vector3(0, 0, 5),
         backgroundColor: 0xF0EFEF,
         modelPath: './models/boom.glb'
     };
+
+    // ===== ПОЛУЧАЕМ КОНТЕЙНЕР =====
+    const container = document.getElementById('three-container');
+    if (!container) {
+        console.error('❌ Контейнер #three-container не найден!');
+    }
 
     // ===== ИНИЦИАЛИЗАЦИЯ СЦЕНЫ =====
     const scene = new THREE.Scene();
@@ -1324,16 +1315,15 @@
 
     // Стили для рендерера
     Object.assign(renderer.domElement.style, {
-        position: 'fixed',
+        position: 'absolute',
         top: '0',
         left: '0',
-        width: '100vw',
-        height: '100vh',
-        zIndex: '0',
-        pointerEvents: 'none'
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none' // чтобы не мешать кликам по слайдам
     });
 
-    document.body.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
 
     // ===== КОНТРОЛЫ =====
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -1341,8 +1331,6 @@
     controls.dampingFactor = 0.05;
     controls.autoRotate = CONFIG.autoRotateCamera;
     controls.autoRotateSpeed = 2.0;
-    
-    // Цель - центр сцены (0,0,0) - модель будет в центре
     controls.target.set(0, 0, 0);
     controls.update();
 
@@ -1379,19 +1367,14 @@
         (gltf) => {
             model = gltf.scene;
             
-            // Центрируем модель
             const box = new THREE.Box3().setFromObject(model);
             const center = box.getCenter(new THREE.Vector3());
             model.position.sub(center);
-            
-            // ВАЖНО: Сбрасываем вращение модели к нулю
-            // Это гарантирует, что модель будет стоять прямо
             model.rotation.set(0, 0, 0);
             
             scene.add(model);
             modelLoaded = true;
             console.log('✅ Модель загружена!', model);
-            console.log('📐 Модель центрирована и выровнена');
         },
         (xhr) => {
             const percent = Math.round((xhr.loaded / xhr.total) * 100);
@@ -1406,7 +1389,6 @@
         }
     );
 
-    // ===== СОЗДАНИЕ ЗАГЛУШКИ =====
     function createFallbackModel() {
         const geometry = new THREE.TorusKnotGeometry(1, 0.3, 64, 8);
         const material = new THREE.MeshStandardMaterial({ 
@@ -1418,7 +1400,7 @@
         });
         model = new THREE.Mesh(geometry, material);
         model.castShadow = true;
-        model.rotation.set(0, 0, 0); // Сбрасываем вращение
+        model.rotation.set(0, 0, 0);
         scene.add(model);
         modelLoaded = true;
         console.log('⚠️ Показана заглушка (тор)');
@@ -1484,7 +1466,6 @@
                 CONFIG.rotationSpeed = Math.max(0.001, CONFIG.rotationSpeed - 0.005);
                 console.log(`⚡ Скорость: ${CONFIG.rotationSpeed.toFixed(3)}`);
                 break;
-            // Сброс позиции камеры на фронтальный обзор
             case 'f':
             case 'F':
                 camera.position.set(0, 0, 5);
@@ -1500,33 +1481,14 @@
         requestAnimationFrame(animate3D);
         
         rotateModel();
-        
         controls.update();
         renderer.render(scene, camera);
     }
     
     animate3D();
 
-    // ===== ИНФОРМАЦИЯ В КОНСОЛЬ =====
-    console.log('🚀 3D сцена запущена!');
-    console.log('📷 Камера смотрит прямо на модель (фронтальный обзор)');
-    console.log(`📍 Позиция камеры: (${CONFIG.cameraPosition.x}, ${CONFIG.cameraPosition.y}, ${CONFIG.cameraPosition.z})`);
-    console.log('📋 Управление:');
-    console.log('  - 1-4: переключение оси вращения');
-    console.log('  - F: сброс на фронтальный обзор');
-    console.log('  - Стрелки: изменение скорости');
-    console.log('  - Клик и перетаскивание: ручное управление камерой');
-
-    // ===== ВИЗУАЛИЗАЦИЯ ОСЕЙ (опционально) =====
-    function addAxesHelper() {
-        const axesHelper = new THREE.AxesHelper(2);
-        scene.add(axesHelper);
-        console.log('📐 Добавлен AxesHelper для визуализации осей');
-    }
-    
-    // Раскомментируйте для отображения осей
-    // addAxesHelper();
-
+    console.log('🚀 3D сцена запущена в контейнере #three-container!');
+    console.log('📌 Модель появляется только на слайде "Варианты установки" (индекс 7)');
 </script>
 </body>
 </html>
